@@ -11,5 +11,8 @@ def inf_whois(domain, report):
 
     save = input("\nDo you want to add this information to the final report?(y/n) ")
 
-    report.append(f"WHOIS INFORMATION FOR {domain.upper()}\n{json.dumps(data, indent=2, default=str)}")
+    if domain not in report:
+        report[domain] = []
+
+    report[domain].append(f"WHOIS INFORMATION FOR {domain.upper()}\n\n{json.dumps(data, indent=2, default=str)}")
 

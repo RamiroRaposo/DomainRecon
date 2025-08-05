@@ -1,7 +1,21 @@
 from modulos.info_whois import inf_whois
 import os
 
-report = []
+report = {}
+
+def gen_report():
+
+    rep_dir = "reports"
+
+    if not os.path.exists(rep_dir):
+        os.makedirs(rep_dir)
+
+    for domain, seccions in report.items():
+        filename = f"report_{domain}.txt"
+        filepath = os.path.join(rep_dir,filename)
+
+        with open(filepath, "w") as f:
+            f.write("\n\n".join(seccions))
 
 print("-------------------------------")
 print("Automatic information gathering")
@@ -35,7 +49,6 @@ Opcion: """)
     print("")
 
     if opcion == "1":
-        
         inf_whois(domain, report)
 
         new_opcion = input("\nDo you want to search for more information?(y/n) ")
@@ -45,8 +58,11 @@ Opcion: """)
             gen_rep_opcion = input("\nDo you want to generate the report?(y/n) ")
             
             if gen_rep_opcion.lower() == "y":
-                pass
-                #gen_report()
+                gen_report()
+
+                print("\n[+] Report generated > report.txt")
+
+                break
             elif gen_rep_opcion.lower() == "n":
                 break
         elif new_opcion.lower() == "y":
@@ -65,15 +81,11 @@ Opcion: """)
         pass
 
     elif opcion == "6":
+        gen_report()
+
+        print("\n[+] Report generated > report.txt")
         
-        #gen_report()
-
-        new_opcion = input("Do you want to search for more information?(y/n) ")
-
-        if new_opcion.lower() == "n":
-            break
-        elif new_opcion.lower() == "y":
-            pass
+        break
 
     elif opcion == "7":
         domain = input("New domain: ")
