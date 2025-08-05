@@ -7,15 +7,20 @@ def gen_report():
 
     rep_dir = "reports"
 
-    if not os.path.exists(rep_dir):
-        os.makedirs(rep_dir)
+    if not report:
+        print(f"[!] No data avaible")
+    else: 
+        if not os.path.exists(rep_dir):
+            os.makedirs(rep_dir)
 
-    for domain, seccions in report.items():
-        filename = f"report_{domain}.txt"
-        filepath = os.path.join(rep_dir,filename)
+        for domain, seccions in report.items():
+            filename = f"report_{domain}.txt"
+            filepath = os.path.join(rep_dir,filename)
 
-        with open(filepath, "w") as f:
-            f.write("\n\n".join(seccions))
+            with open(filepath, "w") as f:
+                f.write("\n\n".join(seccions))
+
+            print(f"\n[+] Report generated > {filename}.txt")
 
 print("-------------------------------")
 print("Automatic information gathering")
@@ -59,9 +64,6 @@ Opcion: """)
             
             if gen_rep_opcion.lower() == "y":
                 gen_report()
-
-                print("\n[+] Report generated > report.txt")
-
                 break
             elif gen_rep_opcion.lower() == "n":
                 break
@@ -83,8 +85,6 @@ Opcion: """)
     elif opcion == "6":
         gen_report()
 
-        print("\n[+] Report generated > report.txt")
-        
         break
 
     elif opcion == "7":
