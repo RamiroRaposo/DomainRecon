@@ -1,4 +1,5 @@
 from modulos.info_whois import inf_whois
+from modulos.info_subdomains import inf_subdmn
 import os
 
 report = {}
@@ -21,6 +22,22 @@ def gen_report():
                 f.write("\n\n".join(seccions))
 
             print(f"\n[+] Report generated > {filename}.txt")
+
+def more_inf():
+    
+    new_opcion = input("\nDo you want to search for more information?(y/n) ")
+
+    if new_opcion.lower() == "n":
+        
+        gen_rep_opcion = input("\nDo you want to generate the report?(y/n) ")
+        
+        if gen_rep_opcion.lower() == "y":
+            gen_report()
+            return False
+        elif gen_rep_opcion.lower() == "n":
+            return False
+    elif new_opcion.lower() == "y":
+        return True
 
 print("-------------------------------")
 print("Automatic information gathering")
@@ -56,31 +73,32 @@ Opcion: """)
     if opcion == "1":
         inf_whois(domain, report)
 
-        new_opcion = input("\nDo you want to search for more information?(y/n) ")
+        if not more_inf():
+            break
 
-        if new_opcion.lower() == "n":
-            
-            gen_rep_opcion = input("\nDo you want to generate the report?(y/n) ")
-            
-            if gen_rep_opcion.lower() == "y":
-                gen_report()
-                break
-            elif gen_rep_opcion.lower() == "n":
-                break
-        elif new_opcion.lower() == "y":
-            pass
-            
     elif opcion == "2":
-        pass
+        inf_subdmn(domain, report)
+
+        if not more_inf():
+            break
 
     elif opcion == "3":
         pass
 
+        if not more_inf():
+            break
+
     elif opcion == "4":
         pass
 
+        if not more_inf():
+            break
+
     elif opcion == "5":
         pass
+
+        if not more_inf():
+            break
 
     elif opcion == "6":
         gen_report()
