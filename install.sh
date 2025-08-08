@@ -2,18 +2,25 @@
 
 set -e
 
-if [ ! -d ".env" ]; then
-    echo -e "\n[+] Creating virtual enviroment..."
-    python -m venv .venv
+if command -v python3 &>/dev/null; then
+    PYTHON=python3
+elif command -v python &>/dev/null; then
+    PYTHON=python
+else
+    echo "[!] Python not found. Install it before continuing"
+    exit 1
 fi
 
-echo -e "\n[+] Activating virtual environment..."
-source .venv/bin/activate
+if [ ! -d ".venv" ]; then
+    echo "[+] Creating virtual environment..."
+    $PYTHON -m venv .venv
+fi
 
 if [ -f requirements.txt ]; then
     echo -e "\n[+] Installing dependencies...\n"
-    python pip install --upgrade pip
-    python pip install -r requirements.txt -q
+    .venv/bin/pip install --upgrade pip
+    .venv/bin/pip install -r requirements.txt -q
+
 else
     echo -e "\n[!] requirements.txt not found"
 fi
