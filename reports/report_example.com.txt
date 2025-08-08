@@ -1,9 +1,0 @@
-SUBDOMAINS FOUNDED FOR EXAMPLE.COM
-
-[
-  "dev.example.com",
-  "m.example.com",
-  "products.example.com",
-  "support.example.com",
-  "www.example.com"
-]
